@@ -23,19 +23,21 @@ import {HttpClientModule} from "@angular/common/http";
 import {RouterModule, Routes} from "@angular/router";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import 'hammerjs';
+import { EditorComponent } from './editor/editor.component';
 
 const appRoutes: Routes = [
   //{ path: 'editor', label:'Editor', component: EditorComponent },
-  { path: 'settings', component: DashboardComponent },
-  { path: 'editor', component: DashboardComponent,   data: { title: 'Heroes List' } },
-  { path: '',    redirectTo: '/editor',    pathMatch: 'full'  },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'editor', component: EditorComponent,   data: { title: 'Heroes List' } },
+  { path: '',    redirectTo: '/dashboard',    pathMatch: 'full'  },
   { path: '**', component: DashboardComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,

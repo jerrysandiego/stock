@@ -9,7 +9,7 @@ export class AppComponent {
   title = 'app';
 
   routes = [
-    { path: 'editor', label:'Editor', icon: 'edit' },
-    { path: 'settings',  label:'Settings', icon: 'build'}
+    { path: 'dashboard',  label:'Dashboard', icon: 'dashboard'},
+    { path: 'editor', label:'Editor', icon: 'edit' }
   ];
 }
