@@ -1,3 +1,32 @@
-<p>
-  editor works!
-</p>
+<form>
+<td-steps mode="horizontal">
+  <td-step #step1 label="Basic Usage" sublabel="Select the stock ticker" [active]="true"
+           [disabled]="disabled" (activated)="activeStep1Event()" (deactivated)="deactiveStep1Event()">
+    <ng-template td-step-label><span>Select stock ticker</span></ng-template>
+    <input type="text" name="ticker" [(ngModel)]="ticker">
+  </td-step>
+  <td-step #step2 label="Add story"
+           sublabel="Type the story you want to add"
+           [state]="stateStep2" [disabled]="disabled" disableRipple>
+    <input type="text" name="story" [(ngModel)]="story">
+    <ng-template td-step-actions>
+      <button mat-raised-button color="primary" (click)="clearStory()" class="text-upper">Clear</button>
+    </ng-template>
+  </td-step>
+  <td-step #step3 label="Complete State" sublabel="Review the story and submit."
+           [state]="stateStep3" [disabled]="disabled">
+    <div>Ticker: {{ticker}}</div>
+    <div>Story: {{story}}</div>
+    <ng-template td-step-summary>
+      Use an optional step summary to summarize the info in this step
+    </ng-template>
+    <ng-template td-step-actions>
+      <button mat-raised-button color="primary" (click)="submit()" class="text-upper">Submit
+      </button>
+<!--
+      <button mat-button (click)="step3.active = false" class="text-upper">Cancel</button>
+-->
+    </ng-template>
+  </td-step>
+</td-steps>
+</form>

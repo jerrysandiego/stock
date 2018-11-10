@@ -33,13 +33,26 @@
       </mat-card-actions>
     </mat-card>
     <mat-card>
-      <mat-card-title>Favorites</mat-card-title>
-      <mat-card-subtitle>Your favorite products</mat-card-subtitle>
+      <mat-card-title>News</mat-card-title>
+      <mat-card-subtitle>Market news</mat-card-subtitle>
       <mat-divider></mat-divider>
       <mat-card-content>
-        card content
+        <mat-list dense>
+          <mat-list-item *ngFor="let message of messages">
+            <h3 matLine>
+              <span style="color: blue; font-weight: bold; font-size: medium">{{message.from}}</span>
+              <span
+                class="demo-2" style="white-space: pre; color: gray">   {{message.content}}</span></h3>
+            <div matLine>
+              <span> {{message.subject}} </span>
+            </div>
+          </mat-list-item>
+        </mat-list>
       </mat-card-content>
       <mat-card-actions>
+        <a mat-button color="accent" class="text-upper" [routerLink]="['/editor']">
+          <span>Add</span>
+        </a>
         <a mat-button color="accent" class="text-upper" [routerLink]="['/product']">
           <span>View More</span>
         </a>
