@@ -1,32 +1,98 @@
-<form>
-<td-steps mode="horizontal">
-  <td-step #step1 label="Basic Usage" sublabel="Select the stock ticker" [active]="true"
-           [disabled]="disabled" (activated)="activeStep1Event()" (deactivated)="deactiveStep1Event()">
-    <ng-template td-step-label><span>Select stock ticker</span></ng-template>
-    <input type="text" name="ticker" [(ngModel)]="ticker">
+<td-steps>
+  <td-step [state]="state1" #step1 label="Profile" sublabel="Symbol and company name" active="true" (deactivated)="update(1, form1.form.valid)">
+    <form #form1="ngForm" (ngSubmit)="save(form1.form.valid)" novalidate>
+      <div layout="row">
+        <mat-form-field flex>
+          <input matInput class="form-control" placeholder="Symbol" #symbol required name="symbol" [(ngModel)]="story.symbol"
+            ngControl="story.symbol">
+        </mat-form-field>
+      </div>
+      <div layout="row">
+        <mat-form-field flex>
+          <input matInput class="form-control" placeholder="Company" #company required name="company" [(ngModel)]="story.company"
+            ngControl="story.company">
+        </mat-form-field>
+      </div>
+      <div class="push-top">
+        <button class="text-upper" mat-button type="submit" color="accent" [disabled]="!form1.form.valid" (click)="step2.active = true">Continue</button>
+        <button class="text-upper" mat-button (click)="step1.active = false; state1 = 'none'; form1.reset()">Cancel</button>
+      </div>
+      <ng-template td-step-summary>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon matListAvatar>account_box</mat-icon>
+            <h4 matLine>{{symbol.value}}</h4>
+            <p matLine>{{company.value}}</p>
+          </mat-list-item>
+        </mat-list>
+      </ng-template>
+    </form>
   </td-step>
-  <td-step #step2 label="Add story"
-           sublabel="Type the story you want to add"
-           [state]="stateStep2" [disabled]="disabled" disableRipple>
-    <input type="text" name="story" [(ngModel)]="story">
-    <ng-template td-step-actions>
-      <button mat-raised-button color="primary" (click)="clearStory()" class="text-upper">Clear</button>
-    </ng-template>
+  <td-step [state]="state2" #step2 label="Story" sublabel="Story text" (deactivated)="update(2, form2.form.valid)">
+    <form #form2="ngForm" (ngSubmit)="save(form2.form.valid)">
+      <div layout="row">
+        <mat-form-field flex>
+          <textarea matInput class="form-control" placeholder="Enter story text here" #storyText required name="text" [(ngModel)]="story.text"
+            ngControl="story.text"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="push-top">
+        <button class="text-upper" type="submit" mat-button color="accent" [disabled]="!form2.form.valid" (click)="step3.active = true">Continue</button>
+        <button class="text-upper" (click)="step2.active = false; state2 = 'none'; form2.reset()" mat-button>Cancel</button>
+      </div>
+      <ng-template td-step-summary>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon matListAvatar>place</mat-icon>
+            <h5 matLine>{{ storyText.value }}</h5>
+          </mat-list-item>
+        </mat-list>
+      </ng-template>
+    </form>
   </td-step>
-  <td-step #step3 label="Complete State" sublabel="Review the story and submit."
-           [state]="stateStep3" [disabled]="disabled">
-    <div>Ticker: {{ticker}}</div>
-    <div>Story: {{story}}</div>
-    <ng-template td-step-summary>
-      Use an optional step summary to summarize the info in this step
-    </ng-template>
-    <ng-template td-step-actions>
-      <button mat-raised-button color="primary" (click)="submit()" class="text-upper">Submit
-      </button>
-<!--
-      <button mat-button (click)="step3.active = false" class="text-upper">Cancel</button>
--->
-    </ng-template>
+  <td-step [state]="state3" #step3 label="Social Media (Optional)" sublabel="Link your account" (deactivated)="update(3, form3.form.valid)">
+    <form #form3="ngForm">
+      <div layout="row">
+        <mat-form-field flex>
+          <input matInput #linkedin placeholder="LinkedIn">
+          <mat-hint align="end">https://linkedin.com/yourName</mat-hint>
+        </mat-form-field>
+      </div>
+      <div layout="row">
+        <mat-form-field flex>
+          <input matInput #facebook placeholder="Facebook">
+          <mat-hint align="end">https://facebook.com/yourName</mat-hint>
+        </mat-form-field>
+      </div>
+      <div layout="row">
+        <mat-form-field flex>
+          <input matInput #twitter placeholder="Twitter">
+          <mat-hint align="end">https://facebook.com/yourHandle</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="push-top">
+        <button class="text-upper" type="submit" mat-button color="accent" (click)="step3.active = false">Continue</button>
+        <button class="text-upper" mat-button (click)="step3.active = false; state3 = 'none'; form3.reset()">Cancel</button>
+      </div>
+      <ng-template *ngIf="linksSummary" td-step-summary>
+        <mat-list>
+          <mat-list-item *ngIf="linkedin.value != ''">
+            <mat-icon matListAvatar>insert_link</mat-icon>
+            <h4 matLine>{{ linkedin.value }}</h4>
+            <p matLine>LinkedIn</p>
+          </mat-list-item>
+          <mat-list-item *ngIf="facebook.value != ''">
+            <mat-icon matListAvatar>insert_link</mat-icon>
+            <h4 matLine>{{ facebook.value }}</h4>
+            <p matLine>Facebook</p>
+          </mat-list-item>
+          <mat-list-item *ngIf="twitter.value != ''">
+            <mat-icon matListAvatar>insert_link</mat-icon>
+            <h4 matLine>{{ twitter.value }}</h4>
+            <p matLine>Twitter</p>
+          </mat-list-item>
+        </mat-list>
+      </ng-template>
+    </form>
   </td-step>
 </td-steps>
-</form>

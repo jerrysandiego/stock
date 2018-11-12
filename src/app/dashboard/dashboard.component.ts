@@ -26,10 +26,7 @@ export class DashboardComponent implements OnInit {
   constructor() { }
 
   randomData(date) {
-    //console.log('date' + date.toLocaleString());
-    //date = new Date(date.getMilliseconds() + this.oneDay);
     date.setDate(date.getDate()+1);
-    //console.log('new date' + date.toLocaleString());
     this.value = this.value + Math.random() * 21 - 10;
     return {
       name: date.toString(),
@@ -47,8 +44,6 @@ export class DashboardComponent implements OnInit {
       this.data.push(this.randomData(now));
       this.data1.push(this.randomData(now));
     }
-    console.log("initial data = " + JSON.stringify(this.data) );
-    console.log("initial data1 = " + JSON.stringify(this.data1) );
     var myChart1 = this.echarts.init(document.getElementById('chart1'));
     // draw chart
     myChart1.setOption({
@@ -115,26 +110,9 @@ export class DashboardComponent implements OnInit {
     });
     this.myChart2 = this.echarts.init(document.getElementById('chart2'));
     // draw chart
-/*
-    myChart2.setOption({
-      title: {
-        text: ''
-      },
-      tooltip: {text:'Nasdaq'},
-      xAxis: {
-        data: ['1', '2', '3', '4', '5', '6']
-      },
-      yAxis: {},
-      series: [{
-        name: 'sales',
-        type: 'line',
-        data: [5, 20, 36, 10, 10, 20]
-      }]
-    });
-*/
     var option = {
       title: {
-        text: '动态数据 + 时间坐标轴'
+        text: ''
       },
       tooltip: {
         trigger: 'axis',
@@ -176,9 +154,9 @@ export class DashboardComponent implements OnInit {
         }]
     };
 
-/*
+
     this.myChart2.setOption(option);
-    setInterval(()=> {
+    /*setInterval(()=> {
       for (var i = 0; i < 5; i++) {
         this.data.shift();
         this.data.push(this.randomData(now));
@@ -189,7 +167,7 @@ export class DashboardComponent implements OnInit {
 
       this.myChart2.setOption({series: [{data: this.data},
         { data: this.data1}]});
-      }, 1000);
-*/
+      }, 1000);*/
+
   }
 }
