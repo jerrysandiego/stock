@@ -1,0 +1,72 @@
+<div layout-gt-sm="row" tdMediaToggle="gt-xs" >
+  <div flex-gt-sm="60">
+    <mat-card>
+      <mat-card-title>Major Indices</mat-card-title>
+      <mat-card-subtitle>Chart of major stock market indices</mat-card-subtitle>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <div id="chart1" flex-gt-sm="100" style="width:100%; height:400px;"></div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>Real Time Quote</mat-card-title>
+      <mat-card-subtitle>Dynamic chart</mat-card-subtitle>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <div id="chart2" style="width:100%; height:400px;"></div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div flex-gt-sm="40">
+    <mat-card>
+      <mat-card-title>Alerts</mat-card-title>
+      <mat-card-subtitle>Market alerts requiring attention</mat-card-subtitle>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <mat-list dense>
+          <mat-list-item *ngFor="let alert of alerts">
+            <h3 matLine layout="column">
+              <span style="color: deepskyblue; font-weight: bold; font-size: medium">{{alert.from}}</span>
+              <span class="demo-2" style="white-space: pre; color: gray">   {{alert.content}}</span>
+            </h3>
+            <div matLine>
+              <span> {{alert.subject}} </span>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions>
+        <a mat-button color="accent" class="text-upper" (click)="loadMoreAlerts()">
+          <span>View More</span>
+        </a>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>News</mat-card-title>
+      <mat-card-subtitle>Market news</mat-card-subtitle>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <mat-list dense>
+          <mat-list-item *ngFor="let message of messages">
+            <h3 matLine layout="column">
+              <span flex="33" style="color: deepskyblue; font-weight: bold; font-size: medium">{{message.from}}</span>
+              <span flex="33"
+                class="demo-2" style="white-space: pre; color: gray">   {{message.content}}</span></h3>
+            <div matLine>
+              <span> {{message.subject}} </span>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-button color="accent" class="text-upper" [routerLink]="['/editor']">
+          <span>Add</span>
+        </a>
+        <a mat-button color="accent" class="text-upper" (click)="loadMoreNews()">
+          <span>View More</span>
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
