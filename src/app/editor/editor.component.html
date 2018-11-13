@@ -1,16 +1,15 @@
 <td-steps>
-  <td-step [state]="state1" #step1 label="Profile" sublabel="Symbol and company name" active="true" (deactivated)="update(1, form1.form.valid)">
+  <td-step [state]="state1" #step1 label="Profile" sublabel="Symbol and company name" active="true"
+           (deactivated)="update(1, form1.form.valid)">
     <form #form1="ngForm" (ngSubmit)="save(form1.form.valid)" novalidate>
-      <div layout="row">
-        <mat-form-field flex>
-          <input matInput class="form-control" placeholder="Symbol" #symbol required name="symbol" [(ngModel)]="story.symbol"
-            ngControl="story.symbol">
+      <div layout="row" layout-md="column">
+        <mat-form-field flex="40">
+          <input matInput class="form-control" placeholder="Symbol" #symbol required name="symbol"
+                 [(ngModel)]="story.symbol" ngControl="story.symbol">
         </mat-form-field>
-      </div>
-      <div layout="row">
-        <mat-form-field flex>
-          <input matInput class="form-control" placeholder="Company" #company required name="company" [(ngModel)]="story.company"
-            ngControl="story.company">
+        <mat-form-field flex="40">
+          <input matInput class="form-control" placeholder="Company" #company required name="company"
+                 [(ngModel)]="story.company" ngControl="story.company">
         </mat-form-field>
       </div>
       <div class="push-top">
@@ -31,7 +30,7 @@
   <td-step [state]="state2" #step2 label="Story" sublabel="Story text" (deactivated)="update(2, form2.form.valid)">
     <form #form2="ngForm" (ngSubmit)="save(form2.form.valid)">
       <div layout="row">
-        <mat-form-field flex>
+        <mat-form-field class="example-full-width">
           <textarea matInput class="form-control" placeholder="Enter story text here" #storyText required name="text" [(ngModel)]="story.text"
             ngControl="story.text"></textarea>
         </mat-form-field>
@@ -50,28 +49,28 @@
       </ng-template>
     </form>
   </td-step>
-  <td-step [state]="state3" #step3 label="Social Media (Optional)" sublabel="Link your account" (deactivated)="update(3, form3.form.valid)">
+  <td-step [state]="state3" #step3 label="Social Media" sublabel="Link your account" (deactivated)="update(3, form3.form.valid)">
     <form #form3="ngForm">
       <div layout="row">
-        <mat-form-field flex>
+        <mat-form-field class="example-full-width">
           <input matInput #linkedin placeholder="LinkedIn">
           <mat-hint align="end">https://linkedin.com/yourName</mat-hint>
         </mat-form-field>
       </div>
       <div layout="row">
-        <mat-form-field flex>
+        <mat-form-field class="example-full-width">
           <input matInput #facebook placeholder="Facebook">
           <mat-hint align="end">https://facebook.com/yourName</mat-hint>
         </mat-form-field>
       </div>
       <div layout="row">
-        <mat-form-field flex>
+        <mat-form-field class="example-full-width">
           <input matInput #twitter placeholder="Twitter">
           <mat-hint align="end">https://facebook.com/yourHandle</mat-hint>
         </mat-form-field>
       </div>
       <div class="push-top">
-        <button class="text-upper" type="submit" mat-button color="accent" (click)="step3.active = false">Continue</button>
+        <button class="text-upper" type="submit" mat-button color="accent" (click)="submit()">Continue</button>
         <button class="text-upper" mat-button (click)="step3.active = false; state3 = 'none'; form3.reset()">Cancel</button>
       </div>
       <ng-template *ngIf="linksSummary" td-step-summary>

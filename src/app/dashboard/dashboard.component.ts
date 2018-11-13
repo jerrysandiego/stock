@@ -11,16 +11,20 @@ export class DashboardComponent implements OnInit {
   echarts = require('echarts');
   myChart2;
 
-  messages = [{from: 'Stock1', subject:'Subject1', content:'Friday 12:14pm'},
+  messages = [{from: 'Stock1', subject:'Story about stock1', content:'Friday 12:14pm'},
     {from: 'Stock2', subject:'Story about stock2', content:'Friday 1:14pm'},
     {from: 'Stock3', subject:'Story about stock3', content:'Friday 2:34pm'},
     {from: 'Stock4', subject:'Story about stock4', content:'Friday 2:55pm'},
     {from: 'Stock1', subject:'Story about stock5', content:'Friday 4:14pm'}];
 
-  data = [];
-  data1 = [];
+  alerts = [{from: 'Stock1', subject:'Alert about stock1', content:'Friday 12:14pm'},
+    {from: 'Stock2', subject:'Alert about stock2', content:'Friday 1:14pm'},
+    {from: 'Stock3', subject:'Alert about stock3', content:'Friday 2:34pm'},
+    {from: 'Stock4', subject:'Alert about stock4', content:'Friday 2:55pm'},
+    {from: 'Stock1', subject:'Alert about stock1', content:'Friday 4:14pm'}];
 
-  oneDay = 24 * 3600 * 1000;
+  data = [];
+
   value = Math.random() * 1000;
 
   constructor() { }
@@ -37,12 +41,24 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  loadMoreNews()  {
+    this.messages.push({from: 'Stock7', subject:'Story about stock7', content:'Friday 2:34pm'});
+    this.messages.push({from: 'Stock8', subject:'Story about stock8', content:'Friday 2:34pm'});
+    this.messages.push({from: 'Stock9', subject:'Story about stock9', content:'Friday 2:34pm'});
+    this.messages.push({from: 'Stock10', subject:'Story about stock10', content:'Friday 2:34pm'});
+  }
+
+  loadMoreAlerts() {
+    this.alerts.push({from: 'Stock7', subject:'Alert about stock7', content:'Friday 2:34pm'});
+    this.alerts.push({from: 'Stock8', subject:'Alert about stock8', content:'Friday 2:34pm'});
+    this.alerts.push({from: 'Stock9', subject:'Alert about stock9', content:'Friday 2:34pm'});
+    this.alerts.push({from: 'Stock10', subject:'Alert about stock10', content:'Friday 2:34pm'});
+
+  }
   ngOnInit() {
     var now = new Date(1997, 9, 3);
-    console.log("now = " + now.toDateString());
     for (var i = 0; i < 1000; i++) {
       this.data.push(this.randomData(now));
-      this.data1.push(this.randomData(now));
     }
     var myChart1 = this.echarts.init(document.getElementById('chart1'));
     // draw chart
@@ -139,35 +155,22 @@ export class DashboardComponent implements OnInit {
         }
       },
       series: [{
-        name: '模拟数据',
+        name: 'mock',
         type: 'line',
         showSymbol: false,
         hoverAnimation: false,
         data: this.data
-      },
-        {
-          name: '模拟数据1',
-          type: 'line',
-          showSymbol: false,
-          hoverAnimation: false,
-          data: this.data1
-        }]
+      }]
     };
 
 
     this.myChart2.setOption(option);
-    /*setInterval(()=> {
+    setInterval(()=> {
       for (var i = 0; i < 5; i++) {
         this.data.shift();
         this.data.push(this.randomData(now));
-        this.data1.shift();
-        this.data1.push(this.randomData(now));
       }
-      //console.log("triggered this.data = " + JSON.stringify(this.data));
-
-      this.myChart2.setOption({series: [{data: this.data},
-        { data: this.data1}]});
-      }, 1000);*/
-
+      this.myChart2.setOption({series: [{data: this.data}]});
+      }, 1000);
   }
 }
