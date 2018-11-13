@@ -1,4 +1,4 @@
-# Stock1
+# Stock dashboard POC demo project
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.6.
 
@@ -25,3 +25,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+Note:
+I was not able to use Covalent chart, it always gave error when I included <td-chart> in html code, so I use echart to render the charts on dashboard page instead. 
+Charts will not be resized as the page is resized like the Covalent charts do.
